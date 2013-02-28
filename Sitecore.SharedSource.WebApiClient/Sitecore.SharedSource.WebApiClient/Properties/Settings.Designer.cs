@@ -43,8 +43,7 @@ namespace Sitecore.SharedSource.WebApiClient.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\{YourDirectory}\\Sitecore.SharedSource.WebApiClient\\Sitecore.SharedSource.WebAp" +
-            "iClient.Demo\\bin\\Debug\\SitecoreWebApiClient.config")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\{YourConfigDirectory}\\SitecoreWebApiClient.config")]
         public string ConfigurationFilePath {
             get {
                 return ((string)(this["ConfigurationFilePath"]));
