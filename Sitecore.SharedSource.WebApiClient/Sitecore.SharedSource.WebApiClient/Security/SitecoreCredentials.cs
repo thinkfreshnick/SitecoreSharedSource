@@ -12,7 +12,7 @@ namespace Sitecore.SharedSource.WebApiClient.Security
         /// </summary>
         public SitecoreCredentials()
         {
-            ErrorMessage = "Username and password must be specified";
+            
         }
 
         #region Implementation of IValidated
@@ -32,7 +32,7 @@ namespace Sitecore.SharedSource.WebApiClient.Security
         /// <value>
         /// The error message.
         /// </value>
-        public string ErrorMessage { get; private set; }
+        public string ErrorMessage { get { return "Username and password must be specified"; } }
 
         #endregion
 
