@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B22A17B6-819E-4B35-B9CE-E7F835BCBCBC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sitecore.SharedSource.WebApiClient</RootNamespace>
+    <AssemblyName>Sitecore.SharedSource.WebApiClient</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\Debug\Sitecore.SharedSource.WebApiClient.XML</DocumentationFile>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Data\AuthenticatedSitecoreDataContext.cs" />
+    <Compile Include="Data\SitecoreActionQuery.cs" />
+    <Compile Include="Data\SitecoreDataContext.cs" />
+    <Compile Include="Data\SitecoreExpressionQuery.cs" />
+    <Compile Include="Data\SitecoreItemQuery.cs" />
+    <Compile Include="Data\SitecoreQuery.cs" />
+    <Compile Include="Diagnostics\LogFactory.cs" />
+    <Compile Include="Entities\WebApiError.cs" />
+    <Compile Include="Entities\WebApiField.cs" />
+    <Compile Include="Entities\WebApiItem.cs" />
+    <Compile Include="Entities\WebApiResult.cs" />
+    <Compile Include="Enums.cs" />
+    <Compile Include="Interfaces\IAuthenticatedSitecoreDataContext.cs" />
+    <Compile Include="Interfaces\IBaseQuery.cs" />
+    <Compile Include="Interfaces\IBaseResponse.cs" />
+    <Compile Include="Interfaces\ISitecoreActionQuery.cs" />
+    <Compile Include="Interfaces\ISitecoreCredentials.cs" />
+    <Compile Include="Interfaces\ISitecoreDataContext.cs" />
+    <Compile Include="Interfaces\ISitecorePublicKeyResponse.cs" />
+    <Compile Include="Interfaces\ISitecoreQuery.cs" />
+    <Compile Include="Interfaces\ISitecoreExpressionQuery.cs" />
+    <Compile Include="Interfaces\ISitecoreItemQuery.cs" />
+    <Compile Include="Interfaces\ISitecoreWebResponse.cs" />
+    <Compile Include="Interfaces\ISitecoreWebResponseInfo.cs" />
+    <Compile Include="Interfaces\IValidated.cs" />
+    <Compile Include="Net\SitecorePublicKeyResponse.cs" />
+    <Compile Include="Net\SitecoreWebResponse.cs" />
+    <Compile Include="Net\SitecoreWebResponseInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Security\SitecoreCredentials.cs" />
+    <Compile Include="Structs.cs" />
+    <Compile Include="Util\BoolExtensions.cs" />
+    <Compile Include="Util\DictionaryExtensions.cs" />
+    <Compile Include="Util\EnumExtensions.cs" />
+    <Compile Include="Util\SecurityUtil.cs" />
+    <Compile Include="Util\StringExtensions.cs" />
+    <Compile Include="Util\SettingsUtility.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Config\SitecoreWebApiClient.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

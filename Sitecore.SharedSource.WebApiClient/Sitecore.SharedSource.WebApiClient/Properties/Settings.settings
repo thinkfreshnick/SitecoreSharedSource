@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Sitecore.SharedSource.WebApiClient.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="DefaultApiVersion" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DefaultDatabase" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">web</Value>
+    </Setting>
+    <Setting Name="ConfigurationFilePath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\{YourDirectory}\Sitecore.SharedSource.WebApiClient\Sitecore.SharedSource.WebApiClient.Demo\bin\Debug\SitecoreWebApiClient.config</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
