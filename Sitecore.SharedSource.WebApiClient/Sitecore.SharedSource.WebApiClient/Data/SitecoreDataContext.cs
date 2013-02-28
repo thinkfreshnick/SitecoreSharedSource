@@ -27,7 +27,7 @@ namespace Sitecore.SharedSource.WebApiClient.Data
         /// <exception cref="System.NotSupportedException">the hostName paramater cannot be null or empty when creating an instance of SitecoreDataContext</exception>
         public  SitecoreDataContext(string hostName, bool isSecure = false)
         {
-            var hostNameType = Uri.CheckHostName(hostName.Replace("https://", string.Empty).Replace("http://", string.Empty));
+            var hostNameType = Uri.CheckHostName(hostName.Replace("https://", string.Empty).Replace("http://", string.Empty).TrimEnd('/'));
 
             if (hostNameType == UriHostNameType.Unknown)
             {
