@@ -28,5 +28,21 @@
         /// The total count.
         /// </value>
         public int TotalCount { get; set; }
+
+        /// <summary>
+        /// Gets or sets the count.
+        /// </summary>
+        /// <value>
+        /// The count.
+        /// </value>
+        public int Count { get; set; }
+
+        /// <summary>
+        /// Gets or sets the item ids.
+        /// </summary>
+        /// <value>
+        /// The item ids.
+        /// </value>
+        public string[] ItemIds { get; set; }
     }
 }

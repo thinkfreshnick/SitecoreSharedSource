@@ -27,7 +27,7 @@ namespace Sitecore.SharedSource.WebApiClient.Demo
             ItemQuerySample(context);
 
             // working with fields example
-            
+
             FieldsSample(context);
 
             // secure context
@@ -44,8 +44,12 @@ namespace Sitecore.SharedSource.WebApiClient.Demo
 
             CredentialsSample(secureContext);
 
+            // deleting
+
+            DeleteQuerySample(secureContext);
+
             // encrypted credentials
-           
+
             var encryptedSecureContext = new AuthenticatedSitecoreDataContext(
                 host,
                 new SitecoreCredentials
@@ -158,6 +162,51 @@ namespace Sitecore.SharedSource.WebApiClient.Demo
                 foreach (WebApiItem item in response.Result.Items)
                 {
                     Wl("path", item.Path);
+                }
+            }
+            else
+            {
+                WriteError(response);
+            }
+
+            Nl();
+        }
+
+        /// <summary>
+        /// Item deletion sample
+        /// </summary>
+        /// <para>
+        ///     Requires an authenticated data context
+        /// </para>
+        /// <para>
+        ///     The user must have delete permissions on the item
+        /// </para>
+        /// <param name="context">The context.</param>
+        private static void DeleteQuerySample(AuthenticatedSitecoreDataContext context)
+        {
+            // WARNING: all items in the query scope and their descendants will be deleted
+            // only items in the query scope count toward the response count
+            var query = new SitecoreItemQuery(SitecoreQueryType.Delete)
+            {
+                ItemId = "{11111111-xxxx-1111-xxxx-111111111111}",
+                QueryScope = new[] { SitecoreItemScope.Self },
+                Database = "master"
+            };
+
+            ISitecoreWebResponse response = context.GetResponse<SitecoreWebResponse>(query);
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                WriteResponseMeta(response);
+
+                Wl("deletion count", response.Result.Count);
+
+                if (response.Result.ItemIds != null)
+                {
+                    foreach (string id in response.Result.ItemIds)
+                    {
+                        Wl("id", id);
+                    }
                 }
             }
             else

@@ -9,9 +9,15 @@
         /// Read only query
         /// </summary>
         Read,
+        /// <summary>
+        /// Creates new items
+        /// </summary>
         //Create,
         //Update,
-        //Delete,
+        /// <summary>
+        /// Deletes existing items
+        /// </summary>
+        Delete,
         //MediaCreate
     }
 
