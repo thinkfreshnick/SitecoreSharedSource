@@ -44,18 +44,18 @@
                 case SitecoreQueryType.Read:
                     output = "GET";
                     break;
-                //case SitecoreQueryType.Create:
-                //    output = "POST";
-                //    break;
+                case SitecoreQueryType.Create:
+                    output = "POST";
+                    break;
                 case SitecoreQueryType.Delete:
                     output = "DELETE";
                     break;
                 //case SitecoreQueryType.MediaCreate:
                 //    output = "POST";
                 //    break;
-                //case SitecoreQueryType.Update:
-                //    output = "PUT";
-                //    break;
+                case SitecoreQueryType.Update:
+                    output = "PUT";
+                    break;
             }
 
             return output;

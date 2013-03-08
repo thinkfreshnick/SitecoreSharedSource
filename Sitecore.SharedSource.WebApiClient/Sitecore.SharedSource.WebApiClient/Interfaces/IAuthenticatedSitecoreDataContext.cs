@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 
 namespace Sitecore.SharedSource.WebApiClient.Interfaces
 {
@@ -14,6 +15,12 @@ namespace Sitecore.SharedSource.WebApiClient.Interfaces
         /// The credentials.
         /// </value>
         ISitecoreCredentials Credentials { get; }
+
+        /// <summary>
+        /// Creates the request.
+        /// </summary>
+        /// <returns></returns>
+        HttpWebRequest CreateRequest(Uri uri, SitecoreQueryType type, string postData);
 
         /// <summary>
         /// Applies the headers.

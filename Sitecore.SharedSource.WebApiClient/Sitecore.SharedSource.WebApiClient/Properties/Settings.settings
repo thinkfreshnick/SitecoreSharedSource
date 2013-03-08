@@ -9,7 +9,7 @@
       <Value Profile="(Default)">web</Value>
     </Setting>
     <Setting Name="ConfigurationFilePath" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">C:\{YourConfigDirectory}\SitecoreWebApiClient.config</Value>
+      <Value Profile="(Default)">C:\GitRepositories\NickAllen\SitecoreSharedSource\Sitecore.SharedSource.WebApiClient\Sitecore.SharedSource.WebApiClient\Config\SitecoreWebApiClient.config</Value>
     </Setting>
   </Settings>
 </SettingsFile>

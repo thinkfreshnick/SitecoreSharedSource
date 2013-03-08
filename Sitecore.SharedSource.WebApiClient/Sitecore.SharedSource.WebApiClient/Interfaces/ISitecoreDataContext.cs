@@ -20,12 +20,11 @@ namespace Sitecore.SharedSource.WebApiClient.Interfaces
         /// Gets the specified URI.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="uri">The URI.</param>
-        /// <param name="type">The type.</param>
+        /// <param name="request">The request.</param>
         /// <param name="responseFormat">The response format.</param>
         /// <param name="scResponse">The sc response.</param>
         /// <returns></returns>
-        T Get<T>(Uri uri, SitecoreQueryType type, ResponseFormat responseFormat, T scResponse) where T: class, IBaseResponse;
+        T Get<T>(HttpWebRequest request, ResponseFormat responseFormat, T scResponse) where T: class, IBaseResponse;
 
         /// <summary>
         /// Gets or sets the name of the host.

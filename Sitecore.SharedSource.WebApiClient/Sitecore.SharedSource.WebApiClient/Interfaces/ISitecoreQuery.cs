@@ -64,12 +64,20 @@ namespace Sitecore.SharedSource.WebApiClient.Interfaces
         string Language { get; set; }
 
         /// <summary>
-        /// Gets or sets the fields.
+        /// Gets or sets the fields to return in the response.
         /// </summary>
         /// <value>
-        /// The fields.
+        /// The fields to return.
         /// </value>
-        IEnumerable<string> Fields { get; set; }
+        IEnumerable<string> FieldsToReturn { get; set; }
+
+        /// <summary>
+        /// Gets or sets fields and their values for update or create operations.
+        /// </summary>
+        /// <value>
+        /// The fields to update.
+        /// </value>
+        IDictionary<string, string> FieldsToUpdate { get; set; }
 
         /// <summary>
         /// Gets the query parameter.

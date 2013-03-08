@@ -86,6 +86,14 @@ namespace Sitecore.SharedSource.WebApiClient.Data
         public ResponseFormat ResponseFormat { get; set; }
 
         /// <summary>
+        /// Gets or sets the fields used for create requests.
+        /// </summary>
+        /// <value>
+        /// The fields.
+        /// </value>
+        public IDictionary<string, string> FieldsToUpdate { get; set; }
+
+        /// <summary>
         /// Gets or sets the payload.
         /// </summary>
         /// <value>
@@ -183,7 +191,7 @@ namespace Sitecore.SharedSource.WebApiClient.Data
         /// <value>
         /// The fields.
         /// </value>
-        public IEnumerable<string> Fields { get; set; }
+        public IEnumerable<string> FieldsToReturn { get; set; }
 
         /// <summary>
         /// Gets the query parameter.
@@ -199,7 +207,7 @@ namespace Sitecore.SharedSource.WebApiClient.Data
         /// <value>
         /// The query string parameters.
         /// </value>
-        public IDictionary<string, string> QueryStringParameters
+        public virtual IDictionary<string, string> QueryStringParameters
         {
             get
             {
@@ -220,9 +228,9 @@ namespace Sitecore.SharedSource.WebApiClient.Data
                     dictionary.Add(Structs.QueryStringKeys.PageSize, PageSize.ToString(CultureInfo.InvariantCulture));
                 }
 
-                if (Fields != null)
+                if (FieldsToReturn != null)
                 {
-                    dictionary.Add(Structs.QueryStringKeys.Fields, string.Join("|", Fields));
+                    dictionary.Add(Structs.QueryStringKeys.Fields, string.Join("|", FieldsToReturn));
                 }
 
                 dictionary.Add(QueryParameter.Key, QueryParameter.Value);

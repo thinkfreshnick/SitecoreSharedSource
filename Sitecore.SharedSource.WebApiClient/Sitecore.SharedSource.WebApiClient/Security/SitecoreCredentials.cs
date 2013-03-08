@@ -7,14 +7,6 @@ namespace Sitecore.SharedSource.WebApiClient.Security
     /// </summary>
     public class SitecoreCredentials : ISitecoreCredentials
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SitecoreCredentials" /> class.
-        /// </summary>
-        public SitecoreCredentials()
-        {
-            
-        }
-
         #region Implementation of IValidated
 
         /// <summary>

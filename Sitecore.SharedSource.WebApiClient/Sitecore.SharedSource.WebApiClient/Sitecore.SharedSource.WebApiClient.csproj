@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Data\AuthenticatedSitecoreDataContext.cs" />
     <Compile Include="Data\SitecoreActionQuery.cs" />
+    <Compile Include="Data\SitecoreCreateQuery.cs" />
     <Compile Include="Data\SitecoreDataContext.cs" />
     <Compile Include="Data\SitecoreExpressionQuery.cs" />
     <Compile Include="Data\SitecoreItemQuery.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Interfaces\IBaseQuery.cs" />
     <Compile Include="Interfaces\IBaseResponse.cs" />
     <Compile Include="Interfaces\ISitecoreActionQuery.cs" />
+    <Compile Include="Interfaces\ISitecoreCreateQuery.cs" />
     <Compile Include="Interfaces\ISitecoreCredentials.cs" />
     <Compile Include="Interfaces\ISitecoreDataContext.cs" />
     <Compile Include="Interfaces\ISitecorePublicKeyResponse.cs" />

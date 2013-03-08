@@ -36,13 +36,25 @@ namespace Sitecore.SharedSource.WebApiClient.Demo
                                             host,
                                             new SitecoreCredentials
                                                                 {
-                                                                    UserName = "extranet\\",
-                                                                    Password = ""
+                                                                    UserName = "sitecore\\foo",
+                                                                    Password = "bar"
                                                                 });
 
             // credentials
 
             CredentialsSample(secureContext);
+
+            // creating
+
+            CreateItemSample(secureContext);
+
+            // updating using item ids
+
+            UpdateItemIdSample(secureContext);
+
+            // updating using queries
+
+            UpdateItemExpressionSample(secureContext);
 
             // deleting
 
@@ -54,8 +66,8 @@ namespace Sitecore.SharedSource.WebApiClient.Demo
                 host,
                 new SitecoreCredentials
                     {
-                        UserName = "extranet\\",
-                        Password = "",
+                        UserName = "siteore\\foo",
+                        Password = "bar",
                         EncryptHeaders = true
                     });
 
@@ -173,6 +185,162 @@ namespace Sitecore.SharedSource.WebApiClient.Demo
         }
 
         /// <summary>
+        /// Item creation sample
+        /// </summary>
+        /// <para>
+        ///     Requires an authenticated data context
+        /// </para>
+        /// <para>
+        ///     The user must have create permissions on the parent
+        /// </para>
+        /// <param name="context">The context.</param>
+        private static void CreateItemSample(AuthenticatedSitecoreDataContext context)
+        {
+            var query = new SitecoreCreateQuery(SitecoreQueryType.Create)
+            {
+                Name = "Foo",
+                ItemId = "{11111111-1111-1111-1111-111111111111}",
+                ParentQuery = "/sitecore/content/Home",
+                Template = "{11111111-1111-1111-1111-111111111111}",
+                Database = "master",
+                FieldsToUpdate = new Dictionary<string, string>
+                                                   {
+                                                       { "Field Name", "Value" },
+                                                       { "{11111111-1111-1111-1111-111111111111}", "Value" }
+                                                   },
+                FieldsToReturn = new List<string>
+                                                    {
+                                                        "Field Name",
+                                                        "{11111111-1111-1111-1111-111111111111}"
+                                                    }
+            };
+
+            ISitecoreWebResponse response = context.GetResponse<SitecoreWebResponse>(query);
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                WriteResponseMeta(response);
+
+                foreach (WebApiItem item in response.Result.Items)
+                {
+                    Wl("path", item.Path);
+                    WriteFields(item);
+                }
+            }
+            else
+            {
+                WriteError(response);
+            }
+
+            Nl();
+        }
+
+        /// <summary>
+        /// Item updating sample using item id
+        /// </summary>
+        /// <para>
+        ///     Requires an authenticated data context
+        /// </para>
+        /// <para>
+        ///     The user must have write permissions on the item
+        /// </para>
+        /// <param name="context">The context.</param>
+        private static void UpdateItemIdSample(AuthenticatedSitecoreDataContext context)
+        {
+            var query = new SitecoreItemQuery(SitecoreQueryType.Update)
+            {
+                ItemId = "{11111111-1111-1111-1111-111111111111}",
+                QueryScope = new[]
+                                 {
+                                     SitecoreItemScope.Self,
+                                     SitecoreItemScope.Children
+                                 },
+                Database = "master",
+                FieldsToUpdate = new Dictionary<string, string>
+                                                   {
+                                                       { "Field Name", "Value" },
+                                                       { "{11111111-1111-1111-1111-111111111111}", "Value" }
+                                                   },
+                FieldsToReturn = new List<string> 
+                                                    {
+                                                        "Field Name",
+                                                        "{11111111-1111-1111-1111-111111111111}"
+                                                    }
+            };
+            
+            ISitecoreWebResponse response = context.GetResponse<SitecoreWebResponse>(query);
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                WriteResponseMeta(response);
+
+                foreach (WebApiItem item in response.Result.Items)
+                {
+                    Wl("path", item.Path);
+                    WriteFields(item);
+                }
+            }
+            else
+            {
+                WriteError(response);
+            }
+
+            Nl();
+        }
+
+        /// <summary>
+        /// Item updating sample using Sitecore query
+        /// </summary>
+        /// <para>
+        ///     Requires an authenticated data context
+        /// </para>
+        /// <para>
+        ///     The user must have write permissions on the item
+        /// </para>
+        /// <param name="context">The context.</param>
+        private static void UpdateItemExpressionSample(AuthenticatedSitecoreDataContext context)
+        {
+            var query = new SitecoreExpressionQuery(SitecoreQueryType.Update)
+            {
+                Query = "/sitecore/content/Home",
+                QueryScope = new[]
+                                 {
+                                     SitecoreItemScope.Self
+                                 },
+                Database = "master",
+                FieldsToUpdate = new Dictionary<string, string>
+                                                   {
+                                                       { "Field Name", "Value" },
+                                                       { "{11111111-1111-1111-1111-111111111111}", "Value" }
+                                                   },
+                FieldsToReturn = new List<string> 
+                                                    {
+                                                        "Field Name",
+                                                        "{11111111-1111-1111-1111-111111111111}"
+                                                    }
+            };
+
+            ISitecoreWebResponse response = context.GetResponse<SitecoreWebResponse>(query);
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                WriteResponseMeta(response);
+
+                foreach (WebApiItem item in response.Result.Items)
+                {
+                    Wl("path", item.Path);
+                    WriteFields(item);
+                }
+            }
+            else
+            {
+                WriteError(response);
+            }
+
+            Nl();
+        }
+
+        /// <summary>
         /// Item deletion sample
         /// </summary>
         /// <para>
@@ -188,9 +356,9 @@ namespace Sitecore.SharedSource.WebApiClient.Demo
             // only items in the query scope count toward the response count
             var query = new SitecoreItemQuery(SitecoreQueryType.Delete)
             {
-                ItemId = "{11111111-xxxx-1111-xxxx-111111111111}",
+                ItemId = "{11111111-1111-1111-1111-111111111111}",
                 QueryScope = new[] { SitecoreItemScope.Self },
-                Database = "master"
+                Database = "web"
             };
 
             ISitecoreWebResponse response = context.GetResponse<SitecoreWebResponse>(query);
@@ -265,9 +433,7 @@ namespace Sitecore.SharedSource.WebApiClient.Demo
         {
             foreach (KeyValuePair<string, WebApiField> field in item.Fields)
             {
-                Wl("fieldid", field.Key);
                 Wl("fieldname", field.Value.Name);
-                Wl("fieldtype", field.Value.Type);
                 Wl("fieldvalue", field.Value.Value);
                 Nl();
             }

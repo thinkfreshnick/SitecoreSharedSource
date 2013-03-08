@@ -56,6 +56,14 @@ namespace Sitecore.SharedSource.WebApiClient.Entities
         public string Language { get; set; }
 
         /// <summary>
+        /// Gets or sets the long id.
+        /// </summary>
+        /// <value>
+        /// The long id.
+        /// </value>
+        public string LongId { get; set; }
+
+        /// <summary>
         /// Gets or sets the path.
         /// </summary>
         /// <value>

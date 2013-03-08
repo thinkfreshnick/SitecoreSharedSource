@@ -52,29 +52,33 @@ namespace Sitecore.SharedSource.WebApiClient.Data
                 throw new ArgumentNullException("query");
             }
 
+            if (query.QueryType == SitecoreQueryType.Create || query.QueryType == SitecoreQueryType.Update)
+            {
+                throw new InvalidOperationException("A create or update query must be used with an authenticated data context");
+            }
+
             // build the query
             var uri = query.BuildUri(_hostName);
 
+            var request = CreateRequest(uri, query.QueryType);
+
             // send the request
-            return Get(uri, query.QueryType, query.ResponseFormat, new T());
+            return Get(request, query.ResponseFormat, new T());
         }
 
         /// <summary>
         /// Gets the specified URI.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="uri">The URI.</param>
-        /// <param name="type">The type.</param>
+        /// <param name="request">The request.</param>
         /// <param name="responseFormat">The response format.</param>
         /// <param name="scResponse">The sc response.</param>
         /// <returns></returns>
         /// <exception cref="System.ArgumentNullException">scResponse</exception>
-        public virtual T Get<T>(Uri uri, SitecoreQueryType type, ResponseFormat responseFormat, T scResponse) where T: class, IBaseResponse
+        public virtual T Get<T>(HttpWebRequest request, ResponseFormat responseFormat, T scResponse) where T: class, IBaseResponse
         {
             if (scResponse == null)
                 throw new ArgumentNullException("scResponse");
-
-            var request = CreateRequest(uri, type);
 
             try
             {
@@ -107,7 +111,7 @@ namespace Sitecore.SharedSource.WebApiClient.Data
                             {
                                 scResponse.Info = new SitecoreWebResponseInfo
                                                       {
-                                                          Uri = uri,
+                                                          Uri = request.RequestUri,
                                                           ResponseTime = sw.Elapsed
                                                       };
 

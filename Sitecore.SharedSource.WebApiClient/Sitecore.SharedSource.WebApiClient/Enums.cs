@@ -12,8 +12,11 @@
         /// <summary>
         /// Creates new items
         /// </summary>
-        //Create,
-        //Update,
+        Create,
+        /// <summary>
+        /// Updates existing items
+        /// </summary>
+        Update,
         /// <summary>
         /// Deletes existing items
         /// </summary>

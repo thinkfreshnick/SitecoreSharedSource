@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Text;
 using Sitecore.SharedSource.WebApiClient.Diagnostics;
 using Sitecore.SharedSource.WebApiClient.Interfaces;
 using Sitecore.SharedSource.WebApiClient.Net;
@@ -93,6 +94,33 @@ namespace Sitecore.SharedSource.WebApiClient.Data
             }
         }
 
+        /// <summary>
+        /// Creates the request.
+        /// </summary>
+        /// <returns></returns>
+        public virtual HttpWebRequest CreateRequest(Uri uri, SitecoreQueryType type, string postData)
+        {
+            var request = CreateRequest(uri, type);
+
+            try
+            {
+                byte[] buffer = Encoding.UTF8.GetBytes(postData);
+
+                request.ContentLength = buffer.Length;
+
+                var requestStream = request.GetRequestStream();
+
+                requestStream.Write(buffer, 0, buffer.Length);
+                requestStream.Close();
+            }
+            catch (Exception ex)
+            {
+                LogFactory.Error("Could not add post data to the HttpWebRequest", ex);
+            }
+
+            return request;
+        }
+
         #endregion
 
         /// <summary>
@@ -107,7 +135,47 @@ namespace Sitecore.SharedSource.WebApiClient.Data
 
             ApplyHeaders(request);
 
+            if (request.Method == "POST" || request.Method == "PUT")
+            {
+                request.ContentType = "application/x-www-form-urlencoded";
+            }
+
             return request;
+        }
+
+        /// <summary>
+        /// Gets the response.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="query">The query.</param>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentNullException">query</exception>
+        public override T GetResponse<T>(IBaseQuery query)
+        {
+            if (query == null)
+            {
+                throw new ArgumentNullException("query");
+            }
+
+            // build the query
+            var uri = query.BuildUri(HostName);
+
+            HttpWebRequest request;
+
+            switch (query.QueryType)
+            {
+                case SitecoreQueryType.Create:
+                case SitecoreQueryType.Update:
+                    request = CreateRequest(uri, query.QueryType,
+                                            ((ISitecoreQuery) query).FieldsToUpdate.ToQueryString());
+                    break;
+                default:
+                    request = CreateRequest(uri, query.QueryType);
+                    break;
+            }
+
+            // send the request
+            return Get(request, query.ResponseFormat, new T());
         }
 
         /// <summary>
