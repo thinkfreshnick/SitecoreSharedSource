@@ -196,7 +196,7 @@ namespace Sitecore.SharedSource.WebApiClient.Demo
         /// <param name="context">The context.</param>
         private static void CreateItemSample(AuthenticatedSitecoreDataContext context)
         {
-            var query = new SitecoreCreateQuery(SitecoreQueryType.Create)
+            var query = new SitecoreCreateQuery
             {
                 Name = "Foo",
                 ItemId = "{11111111-1111-1111-1111-111111111111}",

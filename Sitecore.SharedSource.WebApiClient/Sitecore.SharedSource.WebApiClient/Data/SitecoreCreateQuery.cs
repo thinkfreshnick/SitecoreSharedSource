@@ -12,8 +12,7 @@ namespace Sitecore.SharedSource.WebApiClient.Data
         /// <summary>
         /// Initializes a new instance of the <see cref="SitecoreCreateQuery" /> class.
         /// </summary>
-        /// <param name="type">The type.</param>
-        public SitecoreCreateQuery(SitecoreQueryType type) : base(type)
+        public SitecoreCreateQuery() : base(SitecoreQueryType.Create)
         {
             
         }
