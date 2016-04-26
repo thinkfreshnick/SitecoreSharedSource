@@ -78,6 +78,10 @@ namespace Sitecore.SharedSource.WebApiClient.Entities
         /// The template.
         /// </value>
         public string Template { get; set; }
+        
+        public string TemplateId { get; set; }
+
+        public string TemplateName { get; set; }
 
         /// <summary>
         /// Gets or sets the version.
