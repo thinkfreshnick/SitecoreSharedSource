@@ -133,7 +133,7 @@ namespace Sitecore.SharedSource.WebApiClient.Data
         /// </value>
         public int ItemVersion
         {
-            get { return _itemVersion > 0 ? _itemVersion : 1; }
+            get { return _itemVersion >= 0 ? _itemVersion : 1; }
             set { _itemVersion = value; }
         }
 
@@ -215,11 +215,15 @@ namespace Sitecore.SharedSource.WebApiClient.Data
                                      {
                                          { Structs.QueryStringKeys.Database, Database },
                                          { Structs.QueryStringKeys.ExtractBlob, ExtractBlob.ToIntString() },
-                                         { Structs.QueryStringKeys.ItemVersion,ItemVersion.ToString(CultureInfo.InvariantCulture) },
                                          { Structs.QueryStringKeys.Language, Language },
                                          { Structs.QueryStringKeys.Payload, Payload.ToString() },
                                          { Structs.QueryStringKeys.Scope, string.Join("|", QueryScope.Select(x => x.ToScopeParameter())) }
                                      };
+
+                if (ItemVersion > 0)
+                {
+                    dictionary.Add(Structs.QueryStringKeys.ItemVersion, ItemVersion.ToString(CultureInfo.InvariantCulture));
+                }
 
                 // the Sitecore web service will return a 500 code if specifying a page size <= 0
                 if (PageSize > 0)
