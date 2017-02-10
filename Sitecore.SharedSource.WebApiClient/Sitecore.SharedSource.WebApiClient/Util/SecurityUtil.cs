@@ -38,8 +38,8 @@ namespace Sitecore.SharedSource.WebApiClient.Util
                     var rsaKeyInfo = new RSAParameters
                                          {
                                              // set rsaKeyInfo to the public key values. 
-                                             Modulus = Encoding.UTF8.GetBytes(key.Modulus),
-                                             Exponent = Encoding.UTF8.GetBytes(key.Exponent)
+                                             Modulus = Convert.FromBase64String(key.Modulus),
+                                             Exponent = Convert.FromBase64String(key.Exponent)
                                          };
 
                     rsa.ImportParameters(rsaKeyInfo);
