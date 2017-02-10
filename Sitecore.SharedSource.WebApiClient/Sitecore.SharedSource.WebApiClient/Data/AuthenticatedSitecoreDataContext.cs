@@ -22,14 +22,14 @@ namespace Sitecore.SharedSource.WebApiClient.Data
         /// <exception cref="System.ArgumentException">credentials</exception>
         public AuthenticatedSitecoreDataContext(string hostName, ISitecoreCredentials credentials, bool isSecure = false) : base(hostName, isSecure)
         {
-            if(isSecure && credentials.EncryptHeaders)
-            {
-                throw new InvalidOperationException("If you use an SSL connection, the credentials must not be encrypted. The server takes care of header encryption.");
-            }
-
             if (credentials == null)
             {
                 throw new ArgumentNullException("credentials", "credentials cannot be null when creating a new instance of AuthenticatedSitecoreDataContext");
+            }
+
+            if (isSecure && credentials.EncryptHeaders)
+            {
+                throw new InvalidOperationException("If you use an SSL connection, the credentials must not be encrypted. The server takes care of header encryption.");
             }
 
             if (!credentials.Validate())
